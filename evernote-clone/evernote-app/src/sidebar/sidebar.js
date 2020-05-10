@@ -19,3 +19,5 @@ class SidebarComponent extends React.Component{
         );
     }
 }
+
+export default withStyles(styles)(SidebarComponent)

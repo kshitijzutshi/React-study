@@ -10,9 +10,12 @@ class EditorComponent extends React.Component{
         super();
     }
     render(){
+
+        const { classes } = this.props;
+
         return(
-            <div>
-                Hello from the editor!
+            <div className={classes.editorContainer}>
+               <ReactQuill></ReactQuill>
             </div>
         );
     }

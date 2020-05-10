@@ -1,7 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SidebarComponent from './sidebar/sidebar';
+import EditorComponent from './editor/editor';
+
+
 const firebase = require('firebase');
+
 
 class App extends React.Component{
 
@@ -17,7 +22,10 @@ class App extends React.Component{
 
   render(){
     return(
-      <h1>Hello ReactJS</h1>
+      <div className="app-container">
+        <SidebarComponent></SidebarComponent>
+        <EditorComponent></EditorComponent>
+      </div>
     )
   }
 
@@ -26,9 +34,9 @@ class App extends React.Component{
       .firestore()
       .collection('notes')
       .onSnapshot(serverUpdate => {
-        const notes = serverUpdate.docs.map(_doc => {
-          const data = _doc.data();
-          data['id'] = _doc.id;
+        const notes = serverUpdate.docs.map(doc => {
+          const data = doc.data();
+          data['id'] = doc.id;
           return data;
         });
         console.log(notes);
