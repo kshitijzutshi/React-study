@@ -8,9 +8,11 @@ const firebase = require('firebase');
 require('firebase/firestore');
 
 
+// AIzaSyAJ9gKwZgAg3K6XZ2junmVdWcDKoc8KgL4
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAJ9gKwZgAg3K6XZ2junmVdWcDKoc8KgL4",
+  apiKey: "",
   authDomain: "evernote-clone-2d976.firebaseapp.com",
   databaseURL: "https://evernote-clone-2d976.firebaseio.com",
   projectId: "evernote-clone-2d976",
