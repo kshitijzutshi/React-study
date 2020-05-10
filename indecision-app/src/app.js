@@ -39,6 +39,7 @@ const renderIndecisionApp = () => {
        {(app.subtitle && <p>{app.subtitle}</p>)}
        <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
        <p>Option Array length {app.options.length}</p>
+       
        <button onClick={resetAll}>reset options</button>
        {
            numbers.map((number) => {
