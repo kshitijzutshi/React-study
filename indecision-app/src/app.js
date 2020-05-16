@@ -44,7 +44,7 @@ class Action extends React.Component {
 }
 
 /* 
-
+  
 Passing options array as prop from the Indecision component to Options component, 
 Inside Options class method the THIS is not defined, 
 hence we set this to refer to options array.
