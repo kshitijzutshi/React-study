@@ -8,3 +8,9 @@
 
 ![alt txt](https://github.com/kshitijzutshi/React-study/blob/master/indecision-app/indecision-components.PNG)
 
+#### Notes
+
+- Differences between Props and State
+
+![alt txt](https://github.com/kshitijzutshi/React-study/blob/master/indecision-app/PropsVsState.PNG)
+
