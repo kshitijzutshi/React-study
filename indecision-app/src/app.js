@@ -58,6 +58,10 @@ class IndecisionApp extends React.Component {
   }
 }
 
+/*
+Convert Header to stateless functional component
+
+
 class Header extends React.Component {
   render() {
     return (
@@ -68,6 +72,21 @@ class Header extends React.Component {
     );
   }
 }
+
+*/
+
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <h2>{props.subtitle}</h2>
+    </div>
+  );
+};
+
+/*
+Convert Action to stateless functional component
+
 
 class Action extends React.Component {
   render() {
@@ -84,44 +103,72 @@ class Action extends React.Component {
   }
 }
 
+*/
+
+const Action = (props) => {
+  return (
+    <div>
+      <button onClick={props.handlePick} disabled={!props.hasOptions}>
+        What Should I do?
+      </button>
+    </div>
+  );
+};
+
 /* 
   
 Passing options array as prop from the Indecision component to Options component, 
 Inside Options class method the THIS is not defined, 
 hence we set this to refer to options array.
 
- */
+Converting Options class to stateless functional component
 
 class Options extends React.Component {
   constructor(props) {
     super(props);
-    // this.handleRemoveAll = this.handleRemoveAll.bind(this);
   }
-
-  // handleRemoveAll() {
-  //   console.log(this.props.options);
-
-  //   console.log("remove all alert");
-  // }
-
   render() {
     return (
       <div>
         <button onClick={this.props.handleDeleteOptions}>Remove ALL</button>
-        {/* <p>{`Your options length is ${this.props.options.length}`}</p> */}
-        {this.props.options.map((option) => (
-          <Option key={option} optionText={option} />
-        ))}
-      </div>
-    );
-  }
-}
+        { <p>{`Your options length is ${this.props.options.length}`}</p> }
+        // {this.props.options.map((option) => (
+          // <Option key={option} optionText={option} />
+        // ))}
+      // </div>
+    // );
+  // }
+// }
+
+*/
+
+const Options = (props) => {
+  return (
+    <div>
+      <button onClick={props.handleDeleteOptions}>Remove ALL</button>
+      {/* <p>{`Your options length is ${this.props.options.length}`}</p> */}
+      {props.options.map((option) => (
+        <Option key={option} optionText={option} />
+      ))}
+    </div>
+  );
+};
+
+/*
+
+Converting Option class to stateless functional component
 
 class Option extends React.Component {
   render() {
     return <div>{this.props.optionText}</div>;
   }
 }
+
+*/
+
+const Option = (props) => {
+  return <div>{props.optionText}</div>;
+};
 
 class AddOption extends React.Component {
   constructor(props) {
@@ -155,20 +202,5 @@ class AddOption extends React.Component {
     );
   }
 }
-
-// const jsx = (
-//   <div>
-//     {/* React Header component rendered */}
-//     <Header />
-//     {/* React Action component rendered */}
-//     <Action />
-//     {/* React Action component rendered */}
-//     <Options />
-//     {/* React Action component rendered */}
-//     <AddOption />
-//   </div>
-// );
-
-// ReactDOM.render(jsx, document.getElementById("app"));
 
 ReactDOM.render(<IndecisionApp />, document.getElementById("app"));
