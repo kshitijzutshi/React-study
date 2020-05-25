@@ -4,17 +4,29 @@ class IndecisionApp extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
-      options: [],
+      // options: [],
+      options: props.options,
     };
   }
 
+  componentDidMount() {
+    console.log("Component did mount");
+  }
+  componentDidUpdate() {
+    console.log("Component did update!");
+  }
+
   handleDeleteOptions() {
-    this.setState(() => {
-      return {
-        options: [],
-      };
-    });
+    // arrow shorthand
+    this.setState(() => ({ options: [] }));
+
+    // this.setState(() => {
+    //   return {
+    //     options: [],
+    //   };
+    // });
   }
   handlePick() {
     const randomnum = Math.floor(Math.random() * this.state.options.length);
@@ -26,11 +38,19 @@ class IndecisionApp extends React.Component {
     } else if (this.state.options.indexOf(option) > -1) {
       return "This item already exists!";
     }
-    this.setState((prevState) => {
-      return {
-        options: prevState.options.concat([option]),
-      };
-    });
+    this.setState((prevState) => ({
+      options: prevState.options.concat([option]),
+    }));
+  }
+
+  handleDeleteOption(optionToRemove) {
+    // console.log("delete single item", optionToRemove);
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => {
+        // this callback fn returns true then nothing changes but false means entire array is deleted
+        return optionToRemove !== option;
+      }),
+    }));
   }
 
   render() {
@@ -50,6 +70,7 @@ class IndecisionApp extends React.Component {
         <Options
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
         />
         {/* React Action component rendered */}
         <AddOption handleAddOption={this.handleAddOption} />
@@ -57,6 +78,10 @@ class IndecisionApp extends React.Component {
     );
   }
 }
+
+IndecisionApp.defaultProps = {
+  options: [],
+};
 
 /*
 Convert Header to stateless functional component
@@ -79,9 +104,14 @@ const Header = (props) => {
   return (
     <div>
       <h1>{props.title}</h1>
-      <h2>{props.subtitle}</h2>
+      {props.subtitle && <h2>{props.subtitle}</h2>}
     </div>
   );
+};
+
+// default props to header -- title and subtitle
+Header.defaultProps = {
+  title: "Indecision",
 };
 
 /*
@@ -148,7 +178,11 @@ const Options = (props) => {
       <button onClick={props.handleDeleteOptions}>Remove ALL</button>
       {/* <p>{`Your options length is ${this.props.options.length}`}</p> */}
       {props.options.map((option) => (
-        <Option key={option} optionText={option} />
+        <Option
+          key={option}
+          optionText={option}
+          handleDeleteOption={props.handleDeleteOption}
+        />
       ))}
     </div>
   );
@@ -167,7 +201,18 @@ class Option extends React.Component {
 */
 
 const Option = (props) => {
-  return <div>{props.optionText}</div>;
+  return (
+    <div>
+      {props.optionText}
+      <button
+        onClick={(e) => {
+          props.handleDeleteOption(props.optionText);
+        }}
+      >
+        remove
+      </button>
+    </div>
+  );
 };
 
 class AddOption extends React.Component {
@@ -183,11 +228,7 @@ class AddOption extends React.Component {
     evt.preventDefault();
     const option = evt.target.elements.option.value.trim();
     const errormsg = this.props.handleAddOption(option);
-    this.setState(() => {
-      return {
-        error: errormsg,
-      };
-    });
+    this.setState(() => ({ error: errormsg }));
   }
 
   render() {
