@@ -30,12 +30,33 @@ var IndecisionApp = function (_React$Component) {
   _createClass(IndecisionApp, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log("Component did mount");
+      try {
+        var json = localStorage.getItem("options");
+        var options = JSON.parse(json);
+        if (options) {
+          this.setState(function () {
+            return { options: options };
+          });
+        }
+
+        console.log("Fetching data");
+      } catch (e) {
+        // do nothing
+      }
     }
   }, {
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      console.log("Component did update!");
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem("options", json);
+        console.log("saving data");
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      console.log("component will get unmounted");
     }
   }, {
     key: "handleDeleteOptions",
@@ -74,7 +95,7 @@ var IndecisionApp = function (_React$Component) {
   }, {
     key: "handleDeleteOption",
     value: function handleDeleteOption(optionToRemove) {
-      console.log("delete single item", optionToRemove);
+      // console.log("delete single item", optionToRemove);
       this.setState(function (prevState) {
         return {
           options: prevState.options.filter(function (option) {
