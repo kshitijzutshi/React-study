@@ -5,9 +5,24 @@ class Counter extends React.Component {
     this.handleMinusOne = this.handleMinusOne.bind(this);
     this.handleReset = this.handleReset.bind(this);
     this.state = {
-      count: props.count,
-      name: props.name,
+      count: 0,
+      // name: props.name,
     };
+  }
+
+  componentDidMount() {
+    const stringNumber = localStorage.getItem("count");
+    const count = parseInt(stringNumber, 10);
+    if (!isNaN(count)) {
+      // if its a number
+      this.setState(() => ({ count: count }));
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.count !== this.state.count) {
+      // const json = JSON.parseInt(this.state.count);
+      localStorage.setItem("count", this.state.count);
+    }
   }
 
   render() {
@@ -26,7 +41,6 @@ class Counter extends React.Component {
     this.setState((prevState) => {
       return {
         count: prevState.count + 1,
-        name: (prevState.name = "Add function activated!"),
       };
     });
   }
@@ -34,24 +48,17 @@ class Counter extends React.Component {
     this.setState((prevState) => {
       return {
         count: prevState.count - 1,
-        name: (prevState.name = "sub function activated!"),
       };
     });
   }
   handleReset() {
     this.setState((prevState) => {
       return {
-        count: (prevState.count = 0),
-        name: (prevState.name = "reset function activated!"),
+        count: 0,
       };
     });
   }
 }
-
-Counter.defaultProps = {
-  count: 0,
-  name: "Default",
-};
 
 ReactDOM.render(<Counter />, document.getElementById("app"));
 // let count = 0;
