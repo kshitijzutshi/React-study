@@ -20,17 +20,34 @@ const App = () => {
     }
   };
   //   background: rgba(26, 27, 28, 0.85);
-  const toggle = () => {
-    $("#root").addClass("rootDark").removeClass("root");
-    $("#searchbox").addClass("searchDark").removeClass("search");
-    $("#city").addClass("cityDark").removeClass("city");
-    $("#city-temp").addClass("city-tempDark").removeClass("city-temp");
-    console.log("HERE!!!");
-  };
+  // const toggle = () => {
+  //   $("#root").addClass("rootDark").removeClass("root");
+  //   $("#searchbox").addClass("searchDark").removeClass("search");
+  //   $("#city").addClass("cityDark").removeClass("city");
+  //   $("#city-temp").addClass("city-tempDark").removeClass("city-temp");
+  //   console.log("HERE!!!");
+  // };
+
+  $(document).ready(function () {
+    var images = [
+      "bg-img1.jpg",
+      "bg-img2.jpg",
+      "bg-img3.jpg",
+      "bg-img4.jpg",
+      "bg-img5.jpg",
+      "bg-img6.jpg",
+    ];
+    $("#main").css({
+      "background-image":
+        "url(./images/" +
+        images[Math.floor(Math.random() * images.length)] +
+        ")",
+    });
+  });
 
   //   console.log(weather.main);
   return (
-    <div className="main-container">
+    <div className="main-container" id="main">
       {/* <div>
         <button onClick={toggle}></button>
       </div> */}
