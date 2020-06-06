@@ -9,4 +9,14 @@ module.exports = {
     path: path.join(__dirname, "public"),
     filename: "bundle.js",
   },
+  module: {
+    rule: [
+      {
+        loader: "babel-loader",
+        // On which file to use babel loader regex
+        test: /\.js$/,
+        exclude: /node_modules/,
+      },
+    ],
+  },
 };
