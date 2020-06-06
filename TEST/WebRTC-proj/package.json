@@ -1,0 +1,21 @@
+{
+  "name": "webrtc-proj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "budo ./index.js --live"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "budo": "^11.6.3",
+    "watchify": "^3.11.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "live-server": "^1.2.1",
+    "simple-peer": "^9.7.2"
+  }
+}
