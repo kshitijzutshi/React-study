@@ -28,10 +28,7 @@
 //     .reduce(func3, 0);
 // }
 
-// q1([1, 2, 3, 4]);
 
-// str = "32.86";
-// console.log(parseInt(str));
 
 arr = ["url1", "url2", "url3"];
 
